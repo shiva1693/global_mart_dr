@@ -59,6 +59,7 @@ resource "aws_iam_role_policy_attachment" "attach" {
   role       = aws_iam_role.lambda_assume_role.name
   policy_arn = aws_iam_policy.lambda_execution_policy.arn
 }
+
 output "lambda_role_arn" {
   value = aws_iam_role.lambda_assume_role.arn
 }

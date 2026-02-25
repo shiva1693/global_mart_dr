@@ -46,3 +46,32 @@ module "lambda_secondary" {
   tags = var.tags
   log_retention_days = 30
 }
+
+module "api_gateway_primary" {
+  source = "../../modules/apigw"
+
+  name_prefix = var.name_prefix
+  region = var.primary_region
+  environment = "dev"
+  stage_name = var.stage_name
+  tags = var.tags
+
+  health_lambda_invoke_arn = module.lambda_primary.health_lambda_invoke_arn
+  products_lambda_invoke_arn = module.lambda_primary.products_lambda_invoke_arn
+  orders_lambda_invoke_arn = module.lambda_primary.orders_lambda_invoke_arn
+} 
+
+module "apigw_secondary" {
+  source    = "../../modules/apigw"
+  providers = { aws = aws.Secondary }
+
+  name_prefix = var.name_prefix
+  tags        = var.tags
+  environment = "dev"
+  stage_name = var.stage_name
+  region      = var.secondary_region
+
+  health_lambda_invoke_arn   = module.lambda_secondary.health_lambda_invoke_arn
+  products_lambda_invoke_arn = module.lambda_secondary.products_lambda_invoke_arn
+  orders_lambda_invoke_arn   = module.lambda_secondary.orders_lambda_invoke_arn
+}

@@ -24,3 +24,9 @@ variable "tags" {
         owner = "terraform-owned"
     }
 }
+
+variable "stage_name" {
+  description = "Stage name for the API Gateway"
+  type = string
+  default = "dev"
+}

@@ -75,3 +75,8 @@ module "apigw_secondary" {
   products_lambda_invoke_arn = module.lambda_secondary.products_lambda_invoke_arn
   orders_lambda_invoke_arn   = module.lambda_secondary.orders_lambda_invoke_arn
 }
+
+module "dns_api" {
+  source = "../../modules/dns_api"
+  tags   = var.tags
+}

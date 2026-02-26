@@ -14,6 +14,10 @@ output "api_dr_zone_id" {
   value = module.dns_api.api_dr_zone_id
 }
 
-output "api_dr_zone_arn" {
-  value = module.dns_api.api_dr_zone_arn
+output "primary_stage_name_debug" {
+  value = module.api_gateway_primary.stage_name
+}
+
+output "secondary_stage_name_debug" {
+  value = module.apigw_secondary.stage_name
 }

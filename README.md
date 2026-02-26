@@ -16,37 +16,6 @@ This project implements a production-style multi-region Disaster Recovery (DR) a
 
 ## 🏗 Architecture
 
-### High-level diagram
-
-```mermaid
-graph TD
-  U[Client / Browser / curl] --> R53[Route 53: Failover Record<br/>api.dr.thezxcvbnm.online]
-
-  R53 -->|PRIMARY healthy| APIP[API Gateway (Regional)<br/>us-east-1]
-  R53 -->|SECONDARY when PRIMARY unhealthy| APIS[API Gateway (Regional)<br/>us-west-2]
-
-  APIP --> LHP[Lambda: health/products/orders<br/>us-east-1]
-  APIS --> LHS[Lambda: health/products/orders<br/>us-west-2]
-
-  LHP --> DDB[(DynamoDB Global Table)]
-  LHS --> DDB
-
-  subgraph Custom Domain + TLS
-    ACM1[ACM cert us-east-1 (DNS validation)] --> APIGWCD1[APIGW Custom Domain (REGIONAL)]
-    ACM2[ACM cert us-west-2 (DNS validation)] --> APIGWCD2[APIGW Custom Domain (REGIONAL)]
-  end
-
-  R53 -. alias .-> APIGWCD1
-  R53 -. alias .-> APIGWCD2
-
-  HC1[Route53 Health Check #1<br/>HTTPS_STR_MATCH /dev/health] --> APIP
-  HC2[Route53 Health Check #2<br/>HTTPS_STR_MATCH /dev/health] --> APIS
-```
-
-**Key idea:** Route 53 decides which region receives traffic based on health checks.
-
----
-
 ## Key Features
 
 ### ✅ Multi-Region Deployment

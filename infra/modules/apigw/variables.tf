@@ -38,3 +38,18 @@ variable "stage_name" {
   description = "Stage name for the API Gateway"
   type        = string
 }
+
+variable "health_lambda_arn" { 
+  description = "ARN for the health Lambda function"
+  type        = string
+}
+
+variable "products_lambda_arn" { 
+  description = "ARN for the products Lambda function"
+  type        = string
+}
+
+variable "orders_lambda_arn" { 
+  description = "ARN for the orders Lambda function"
+  type        = string
+}

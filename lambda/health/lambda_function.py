@@ -3,7 +3,7 @@ import os
 import time
 
 def lambda_handler(event, context):
-    # if os.getenv("FORCE_FAIL") == "0":
+    # if os.getenv("FORCE_FAIL") == "1":
     #     return {"statusCode": 500, "body": "fail"}
 
     return {

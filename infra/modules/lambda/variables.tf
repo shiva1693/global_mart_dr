@@ -15,15 +15,3 @@ variable "log_retention_days" {
 variable "products_src_dir" { type = string }
 variable "orders_src_dir" { type = string }
 variable "health_src_dir" { type = string }
-
-module "lambda_primary" {
-  source = "../../modules/lambda"
-
-  force_fail = "1"
-}
-
-module "lambda_secondary" {
-  source = "../../modules/lambda"
-
-  force_fail = "0"
-}

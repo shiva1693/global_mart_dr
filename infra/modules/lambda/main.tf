@@ -90,6 +90,7 @@ resource "aws_lambda_function" "health" {
       ENVIRONMENT = var.environment
       APP_REGION = var.region
       SERVICE = "health"
+      FORCE_FAIL  = "1"
     }
   }
   tags = var.tags

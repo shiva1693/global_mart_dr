@@ -15,3 +15,9 @@ variable "log_retention_days" {
 variable "products_src_dir" { type = string }
 variable "orders_src_dir" { type = string }
 variable "health_src_dir" { type = string }
+
+variable "force_fail" {
+  description = "Force the health lambda to fail for DR testing"
+  type        = string
+  default     = "0"
+}

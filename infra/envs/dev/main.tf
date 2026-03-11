@@ -21,7 +21,7 @@ module "lambda_primary" {
   environment = "dev"
   region = var.primary_region
 
-  force_fail = "1"
+  force_fail = "0"
 
   products_src_dir = "lambda/products"
   orders_src_dir = "lambda/orders"
